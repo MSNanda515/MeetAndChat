@@ -2,6 +2,7 @@ import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import MenuBar from "../components/MenuBar";
+import ContactsMenu from "../components/ContactsMenu";
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
                 <Header/>
                 <SearchBar/>
                 <MenuBar />
+                <ContactsMenu />
             </SafeAreaView>
         </View>
     )
