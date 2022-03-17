@@ -25,6 +25,27 @@ const UIData = {
 
     defaultButtonBackground: "#0470DC",
 
+    contactsMenuCards: [
+        {
+            type: "starred",
+            name: "Starred"
+        },
+        {
+            type: "contact",
+            name: "Sam Adams",
+            thumbnail: require('../assets/icon.png'),
+        },
+        {
+            type: "contact",
+            name: "Sam Adams",
+            thumbnail: require('../assets/icon.png'),
+        },
+        {
+            type: "contact",
+            name: "Jenny Gray",
+            thumbnail: require('../assets/icon.png'),
+        },
+    ]
 
 };
 

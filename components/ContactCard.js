@@ -1,14 +1,19 @@
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, Image} from 'react-native';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-const ContactCard = () => {
+const ContactCard = ({type, name, thumbnail}) => {
     return (
         <View style={styles.container}>
-            <View style={styles.thumbnail}>
-                <AntDesign name={"star"} size={30} color={"#efefef"} />
-            </View>
+            {type === "starred" ? (
+                <View style={styles.thumbnail}>
+                    <AntDesign name={"star"} size={30} color={"#efefef"} />
+                </View>
+            ) : (
+                <Image source={thumbnail} style={styles.thumbnail} />
+            )}
+
             <Text style={styles.title}>
-                Starred
+                {name}
             </Text>
         </View>
     )
@@ -34,6 +39,5 @@ const styles = StyleSheet.create({
         color: "white",
         paddingLeft: 20,
         fontSize: 18,
-
     }
 });
