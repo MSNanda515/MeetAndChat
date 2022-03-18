@@ -10,14 +10,19 @@ import UIData from "./UIData";
  * @returns {JSX.Element}
  * @constructor
  */
-const MenuButton = ({name, title, backgroundColor}) => {
+const MenuButton = ({name, title, backgroundColor, navigation}) => {
     backgroundColor = backgroundColor || UIData.defaultButtonBackground;
+
+    const openMeeting = () => {
+        navigation.navigate("Room")
+    }
 
     return (
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
                     // style={{...styles.button, backgroundColor: backgroundColor}}
                     style={[styles.button, {backgroundColor: backgroundColor}]}
+                    onPress={()=>openMeeting()}
                 >
                     <FontAwesome name={name} size={23} color={"#ededed"} />
                 </TouchableOpacity>

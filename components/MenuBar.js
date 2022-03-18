@@ -3,7 +3,7 @@ import MenuButton from "./MenuButtons";
 import UIData from "./UIData";
 
 
-const MenuBar = () => {
+const MenuBar = ({navigation}) => {
     const buttonItems = UIData.menuButtons;
 
     return (
@@ -11,7 +11,7 @@ const MenuBar = () => {
             {/*Display the buttons*/}
             {buttonItems.map((item) => (
                 <MenuButton key={item.id} name={item.name} color={""} title={item.title}
-                            backgroundColor={item.backgroundColor}/>
+                            backgroundColor={item.backgroundColor} navigation={navigation}/>
             ))}
         </View>
     );
