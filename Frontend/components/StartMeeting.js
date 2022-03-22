@@ -1,9 +1,12 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {StyleSheet, TextInput, View, Text} from "react-native";
 import {TouchableOpacity} from "react-native-web";
+import {io} from 'socket.io-client';
 
 const InputField = ({fieldState, placeholder}) => {
     let [field, setField] = fieldState;
+
+
 
     return (
         <View style={styles.info}>
@@ -19,6 +22,14 @@ const InputField = ({fieldState, placeholder}) => {
 }
 
 const StartMeeting = () => {
+
+    useEffect(() => {
+
+        const API_URL = 'http://localhost:3001';
+        let socket = io(`${API_URL}`);
+        console.log("Hellooo");
+
+    }, []);
 
     const [name, setName] = useState();
     const [roomId, setRoomId] = useState();
