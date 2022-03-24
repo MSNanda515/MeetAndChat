@@ -6,8 +6,6 @@ import {io} from 'socket.io-client';
 const InputField = ({fieldState, placeholder}) => {
     let [field, setField] = fieldState;
 
-
-
     return (
         <View style={styles.info}>
             <TextInput
@@ -22,17 +20,20 @@ const InputField = ({fieldState, placeholder}) => {
 }
 
 const StartMeeting = () => {
+    const [socket, setSocket] = useState({});
 
-    useEffect(() => {
-
+    useEffect(function() {
         const API_URL = 'http://localhost:3001';
-        let socket = io(`${API_URL}`);
-        console.log("Hellooo");
-
+        setSocket(io(`${API_URL}`));
     }, []);
 
-    const [name, setName] = useState();
-    const [roomId, setRoomId] = useState();
+
+    const [name, setName] = useState("");
+    const [roomId, setRoomId] = useState("");
+
+    const joinRoom = function (){
+        socket.emit('join-room', { roomId: roomId, userName: name })
+    };
 
     return (
         <View style={styles.startMeetingContainer}>
@@ -42,7 +43,7 @@ const StartMeeting = () => {
             <View style={styles.meetingButton}>
                 <TouchableOpacity
                     style={styles.meetingButton}
-                    onPress={() => {}}
+                    onPress={() => {joinRoom()}}
                 >
                     <Text style={styles.meetingButtonText}>Start Meeting</Text>
                 </TouchableOpacity>

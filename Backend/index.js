@@ -3,6 +3,8 @@ const cors = require('cors')
 const app = express();
 app.use(cors());
 
+const users = [];
+
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -12,6 +14,19 @@ const io = new Server(server, {
         methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
     }
 });
+
+const addUser = (userName, roomId) => {
+    user.push({
+        userName,
+        roomId
+    })
+}
+
+const getRoomUsers = (roomId) => {
+    return users.filter((user) => {
+        return user.roomId === roomId;
+    })
+}
 
 const port = 3001;
 
@@ -25,6 +40,18 @@ io.on("connection", socket => {
         console.log("User Joined room");
         console.log(roomId);
         console.log(userName);
+        socket.join(roomId);
+        socket.to(roomId).emit("user-connected", userName);
+        addUser(userName, roomId)
+
+        io.emit(roomId).emit("all-users", getRoomUsers(roomId));
+
+        socket.on("disconnect", () => {
+            console.log("disconnected");
+            socket.leave(roomId);
+
+            io.to(roomId).emit("all-users", getRoomUsers(roomId))
+        })
     })
 });
 
